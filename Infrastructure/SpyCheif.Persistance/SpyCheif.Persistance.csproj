@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\SpyCheif.Domain\SpyCheif.Domain.csproj" />
+    <ProjectReference Include="..\..\Core\SpyCheif.Application\SpyCheif.Application.csproj" />
   </ItemGroup>
 
 </Project>
