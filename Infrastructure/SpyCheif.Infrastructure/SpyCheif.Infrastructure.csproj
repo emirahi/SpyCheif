@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Logging\" />
+    <Compile Remove="Logging\**" />
+    <EmbeddedResource Remove="Logging\**" />
+    <None Remove="Logging\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\SpyCheif.Application\SpyCheif.Application.csproj" />
+    <ProjectReference Include="..\SpyCheif.Persistance\SpyCheif.Persistance.csproj" />
   </ItemGroup>
 
 </Project>

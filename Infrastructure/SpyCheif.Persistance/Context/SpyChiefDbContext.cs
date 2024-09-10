@@ -28,6 +28,7 @@ namespace SpyCheiif.Persistance.Context
             return base.SaveChanges();
         }
 
+        public DbSet<Asset> Assets { get; set; }
 
 
     }

@@ -1,0 +1,6 @@
+@SpyCheif.WebApi_HostAddress = http://localhost:5025
+
+GET {{SpyCheif.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

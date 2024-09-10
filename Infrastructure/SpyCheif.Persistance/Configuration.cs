@@ -8,7 +8,7 @@ public static class Configuration
         get
         {
             ConfigurationManager configurationManager = new();
-            configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(),"../../Presentation/"));
+            configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../../Presentation/SpyCheif.WebApi"));
             configurationManager.AddJsonFile("appsettings.json");
             
             string? result = configurationManager["ConnectionString:Mysql"];
@@ -19,7 +19,7 @@ public static class Configuration
         get
         {
             ConfigurationManager configurationManager = new();
-            configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(),"../../Presentation/"));
+            configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../../Presentation/SpyCheif.WebApi"));
             configurationManager.AddJsonFile("appsettings.json");
 
             return configurationManager["ConnectionString:MysqlVersion"];

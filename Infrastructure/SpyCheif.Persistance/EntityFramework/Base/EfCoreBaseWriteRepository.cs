@@ -80,5 +80,29 @@ namespace SpyCheif.Persistance.EntityFramework.Base
             return _dbContext.SaveChanges();
         }
 
+        public T? Delete(Guid id)
+        {
+            T? entity = _Table.FirstOrDefault(entity => entity.Id == id);
+            if (entity != null)
+            {
+                T resultT = _Table.Remove(entity).Entity;
+                return resultT;
+            }
+            return null;
+        }
+
+        public void DeleteRange(List<Guid> guids)
+        {
+            foreach (var id in guids)
+            {
+                T? entity = _Table.FirstOrDefault(entity => entity.Id == id);
+                if (entity != null)
+                {
+                    _Table.Remove(entity);
+                }
+            }
+        }
+
+
     }
 }

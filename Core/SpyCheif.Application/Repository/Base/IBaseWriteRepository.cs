@@ -17,6 +17,9 @@ namespace SpyCheif.Application.Base
         public T Update(T entity);
         public void UpdateList(List<T> entities);
 
+        public T Delete(Guid id);
+        public void DeleteRange(List<Guid> guids);
+
         public T SetActive(Guid id);
         public T SetPassive(Guid id);
 
