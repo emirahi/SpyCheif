@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpyCheif.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpyCheif.Persistance", "Infrastructure\SpyCheif.Persistance\SpyCheif.Persistance.csproj", "{92A1ED37-FB9B-42AA-944D-0112770062B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpyCheif.WebApi", "Presentation\SpyCheif.WebApi\SpyCheif.WebApi.csproj", "{68290798-A8D4-48D8-9A96-D6BE16AD1DC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpyCheif.WebApi", "Presentation\SpyCheif.WebApi\SpyCheif.WebApi.csproj", "{68290798-A8D4-48D8-9A96-D6BE16AD1DC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

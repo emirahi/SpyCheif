@@ -7,11 +7,22 @@
     <UserSecretsId>63db11b2-e30d-4e0b-befa-d16bf8e69391</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.2.5" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="MongoDB.Bson" Version="2.28.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.28.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\SpyCheif.Application\SpyCheif.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\SpyCheif.Infrastructure\SpyCheif.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\SpyCheif.Persistance\SpyCheif.Persistance.csproj" />
   </ItemGroup>
 
 </Project>

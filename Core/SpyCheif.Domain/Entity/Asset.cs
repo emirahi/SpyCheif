@@ -8,7 +8,8 @@ namespace SpyCheif.Domain.Entity
 {
     public class Asset : BaseEntity
     {
+        public Guid AssetTypeId { get; set; }
         public string Value { get; set; }
-        public int Type { get; set; }
+        public AssetType Type { get; set; }
     }
 }

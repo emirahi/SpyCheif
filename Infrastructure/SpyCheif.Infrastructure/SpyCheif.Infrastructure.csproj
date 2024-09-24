@@ -13,8 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Core\SpyCheif.Application\SpyCheif.Application.csproj" />
-    <ProjectReference Include="..\SpyCheif.Persistance\SpyCheif.Persistance.csproj" />
   </ItemGroup>
 
 </Project>

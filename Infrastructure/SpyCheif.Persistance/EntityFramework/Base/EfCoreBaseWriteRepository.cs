@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SpyCheif.Application.Base;
+using SpyCheif.Application.BaseRdms;
 using SpyCheif.Domain.Entity;
 using SpyCheiif.Persistance.Context;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SpyCheif.Persistance.EntityFramework.Base
 {
-    public class EfCoreBaseWriteRepository<T> : IBaseWriteRepository<T>
+    public class EfCoreBaseWriteRepository<T> : IBaseRdmsWriteRepository<T>
         where T : BaseEntity, new()
     {
         public DbSet<T> _Table;

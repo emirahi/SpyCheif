@@ -12,6 +12,12 @@ namespace SpyCheiif.Persistance.Context
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Asset>().Navigation(asset => asset.Type).AutoInclude();
+            base.OnModelCreating(builder);
+        }
+
         public override int SaveChanges()
         {
             var entities = ChangeTracker.Entries<BaseEntity>();
@@ -29,6 +35,7 @@ namespace SpyCheiif.Persistance.Context
         }
 
         public DbSet<Asset> Assets { get; set; }
+        public DbSet<ServiceDatabase> ServiceDatabases { get; set; }
 
 
     }
