@@ -16,6 +16,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.CreateSecretServices();
+builder.Services.AddCors(option => option.AddDefaultPolicy(policy => policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod()));
 
 var app = builder.Build();
 
@@ -26,10 +27,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseCors();
 app.MapControllers();
 
 app.Run();

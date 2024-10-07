@@ -53,7 +53,9 @@ namespace SpyCheif.Persistance.EntityFramework.Base
 
         public IEnumerable<T> GetAll(bool? isActive = null)
         {
-            return _table.ToList();
+            return isActive == null
+                ? _table.ToList()
+                : _table.Where(entity => entity.IsActive == isActive).ToList();
         }
 
     }

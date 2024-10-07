@@ -9,5 +9,6 @@ namespace SpyCheif.Application.Feature.Query.AssetQuery.GetAll
 {
     public class AssetGetAllQueryRequest:IRequest<AssetGetAllQueryResponse>
     {
+        public bool uniq { get; set; } = false;
     }
 }

@@ -31,7 +31,7 @@ namespace SpyCheif.Application.Constants
 
         #region AssetType
         
-        public static string AssetTypeNotFound = "Asset type ise not found";
+        public static string AssetTypeNotFound = "Asset type is not found";
         public static string AddSuccessAssetTypeMessage = "Asset Type is add operation succeeded";
         public static string AddErrorAssetTypeMessage = "Asset Type is add operation failed";
 

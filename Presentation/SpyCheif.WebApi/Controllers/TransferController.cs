@@ -24,7 +24,7 @@ namespace SpyCheif.WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("[action]")]
+        [HttpGet()]
         public async Task<IActionResult> GetAll([FromQuery]TransferGetAllQueryRequest request)
         {
             var result = await _mediator.Send(request);

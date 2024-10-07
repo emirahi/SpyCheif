@@ -15,6 +15,7 @@ namespace SpyCheif.Application.Mapping
         public AssetMapping()
         {
 
+            CreateMap<Asset, AssetDto>().ForMember(destination => destination.Type, member => member.MapFrom(map => map.Type.Type)).ReverseMap();
             CreateMap<Asset, AddAssetDto>().ReverseMap();
             CreateMap<Asset, UpdateAssetDto>().ReverseMap();
 

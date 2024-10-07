@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using SpyCheif.Application.Constants;
+using SpyCheif.Application.Dto.AssetTypeDtos;
 using SpyCheif.Application.Repository.AssetTypeRepo;
 using SpyCheif.Domain.Entity;
 using System;
@@ -13,16 +15,21 @@ namespace SpyCheif.Application.Feature.Query.AssetTypeQuery.Get
     public class AssetTypeGetQueryHandler : IRequestHandler<AssetTypeGetQueryRequest, AssetTypeGetQueryResponse>
     {
         private readonly IReadAssetTypeRepository _readAssetTypeRepository;
-        public AssetTypeGetQueryHandler(IReadAssetTypeRepository readAssetTypeRepository)
+        private readonly IMapper _mapper;
+        public AssetTypeGetQueryHandler(IReadAssetTypeRepository readAssetTypeRepository, IMapper mapper)
         {
             _readAssetTypeRepository = readAssetTypeRepository;
+            _mapper = mapper;
         }
 
         public async Task<AssetTypeGetQueryResponse> Handle(AssetTypeGetQueryRequest request, CancellationToken cancellationToken)
         {
             AssetType? type = _readAssetTypeRepository.Get(request.Id);
             if (type != null)
-                return new AssetTypeGetQueryResponse() { assetType = type, Status = true, Message = ResultMessages.GetSuccessAssetTypeMessage };
+            {
+                AssetTypeDto assetTypeDto = _mapper.Map<AssetTypeDto>(type);
+                return new AssetTypeGetQueryResponse() { assetType = assetTypeDto, Status = true, Message = ResultMessages.GetSuccessAssetTypeMessage };
+            }
             return new AssetTypeGetQueryResponse() { assetType = null, Status = false, Message = ResultMessages.GetErrorAssetTypeMessage };
 
         }

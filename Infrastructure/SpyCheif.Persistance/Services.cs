@@ -52,8 +52,7 @@ public static class Services
 
         service.AddMediatR(cfg => {
             cfg.RegisterServicesFromAssembly(typeof(AssetAddCommentHandler).Assembly);
-            //cfg.AddOpenBehavior(typeof(PreValidationPipeline<,>));
-            //cfg.AddOpenRequestPreProcessor(typeof(PreValidationPipeline<,>));
+            cfg.AddOpenBehavior(typeof(PreValidationPipeline<,>));
         });
         service.AddAutoMapper(typeof(AssetMapping));
         service.AddValidatorsFromAssemblyContaining<AddAssetValidate>();

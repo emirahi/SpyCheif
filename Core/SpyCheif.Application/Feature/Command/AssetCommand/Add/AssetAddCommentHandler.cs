@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using SpyCheif.Application.Constants;
+using SpyCheif.Application.Dto.AssetDtos;
 using SpyCheif.Application.Repository.AssetRepo;
 using SpyCheif.Application.Repository.AssetTypeRepo;
 using SpyCheif.Domain.Entity;
@@ -15,12 +17,15 @@ namespace SpyCheif.Application.Feature.Command.AssetCommand.Add
     {
         private IWriteAssetRepository _writeAssetRepository;
         private IReadAssetTypeRepository _readAssetTypeRepository;
+        private IMapper _mapper;
         public AssetAddCommentHandler(
             IWriteAssetRepository writeAssetRepository,
-            IReadAssetTypeRepository readAssetTypeRepository)
+            IReadAssetTypeRepository readAssetTypeRepository,
+            IMapper mapper)
         {
             _writeAssetRepository = writeAssetRepository;
             _readAssetTypeRepository = readAssetTypeRepository;
+            _mapper = mapper;
         }
 
         public async Task<AssetAddCommandResponse> Handle(AssetAddCommandRequest request, CancellationToken cancellationToken)
@@ -33,12 +38,15 @@ namespace SpyCheif.Application.Feature.Command.AssetCommand.Add
             int isSaved = _writeAssetRepository.saveChanges();
 
             if (asset != null && isSaved > 0)
+            {
+                AssetDto assetDto = _mapper.Map<AssetDto>(asset);
                 return new AssetAddCommandResponse()
                 {
-                    Asset = asset,
+                    Asset = assetDto,
                     Status = true,
                     Message = ResultMessages.AddSuccessAssetMessage
                 };
+            }
 
             return new AssetAddCommandResponse()
             {

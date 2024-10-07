@@ -11,5 +11,8 @@ namespace SpyCheif.Application.Dto.AssetDtos
         public Guid Id { get; set; }
         public string Value { get; set; }
         public int Type { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
+        public bool IsActive { get; set; }
     }
 }

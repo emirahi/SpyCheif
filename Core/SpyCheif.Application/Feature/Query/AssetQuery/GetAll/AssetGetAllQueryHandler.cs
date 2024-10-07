@@ -1,27 +1,32 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using SpyCheif.Application.Constants;
+using SpyCheif.Application.Dto.AssetDtos;
 using SpyCheif.Application.Repository.AssetRepo;
 using SpyCheif.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpyCheif.Application.Feature.Query.AssetQuery.GetAll
 {
     public class AssetGetAllQueryHandler : IRequestHandler<AssetGetAllQueryRequest, AssetGetAllQueryResponse>
     {
         private readonly IReadAssetRepository _readAssetRepository;
-        public AssetGetAllQueryHandler(IReadAssetRepository readAssetRepository)
+        private readonly IMapper _mapper;
+        public AssetGetAllQueryHandler(IReadAssetRepository readAssetRepository, IMapper mapper)
         {
             _readAssetRepository = readAssetRepository;
+            _mapper = mapper;
         }
         public async Task<AssetGetAllQueryResponse> Handle(AssetGetAllQueryRequest request, CancellationToken cancellationToken)
         {
-            List<Asset> assets = _readAssetRepository.GetAll().ToList();
+            List<Asset> assets = request.uniq
+                ? _readAssetRepository.GetAll().DistinctBy(asset => asset.Value.ToLower().Trim()).ToList()
+                : _readAssetRepository.GetAll().ToList();
+
             if (assets.Count > 0)
-                return new AssetGetAllQueryResponse() { Assets = assets, Status = true, Message = ResultMessages.GetAllSuccessAssetMessage };
+            {
+                List<AssetDto> assetDtos = _mapper.Map<List<AssetDto>>(assets);
+                return new AssetGetAllQueryResponse() { Assets = assetDtos, Status = true, Message = ResultMessages.GetAllSuccessAssetMessage };
+            }
             return new AssetGetAllQueryResponse() { Assets = null, Status = false, Message = ResultMessages.GetAllErrorAssetMessage };
 
         }

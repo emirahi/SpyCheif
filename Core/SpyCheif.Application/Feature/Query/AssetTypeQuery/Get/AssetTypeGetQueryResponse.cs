@@ -1,4 +1,5 @@
-﻿using SpyCheif.Application.Feature.Base;
+﻿using SpyCheif.Application.Dto.AssetTypeDtos;
+using SpyCheif.Application.Feature.Base;
 using SpyCheif.Domain.Entity;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace SpyCheif.Application.Feature.Query.AssetTypeQuery.Get
 {
     public class AssetTypeGetQueryResponse:BaseResponse
     {
-        public AssetType assetType { get; set; }
+        public AssetTypeDto assetType { get; set; }
     }
 }

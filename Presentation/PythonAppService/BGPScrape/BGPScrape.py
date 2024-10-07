@@ -25,7 +25,7 @@ class BGPScrape:
                 title = trow.select_one("a").text.strip()
                 typee = trow.select_one("td:nth-child(2)").text.strip()
                 description = trow.select_one("td:nth-child(3)").text.strip()
-                print(path,title,typee,description,sep="\t")
+                print(path,title,typee,description,sep="\t\t\t")
                 try:
                     records = self.items[typee]
                     records.append({"title":title,"description":description})
@@ -37,6 +37,6 @@ class BGPScrape:
 if __name__ == "__main__":
     url = "https://bgp.he.net/search?search%5Bsearch%5D=booking&commit=Search"
     bgp = BGPScrape(url)
-    bgp.Scrape()
+    bgp.ScrapeTable()
 
 

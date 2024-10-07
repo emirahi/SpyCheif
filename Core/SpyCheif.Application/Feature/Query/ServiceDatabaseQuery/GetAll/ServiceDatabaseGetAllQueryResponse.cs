@@ -1,15 +1,10 @@
-﻿using SpyCheif.Application.Feature.Base;
-using SpyCheif.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SpyCheif.Application.Dto.ServiceDatabaseDtos;
+using SpyCheif.Application.Feature.Base;
 
 namespace SpyCheif.Application.Feature.Query.ServiceDatabaseQuery.GetAll
 {
     public class ServiceDatabaseGetAllQueryResponse:BaseResponse
     {
-        public List<ServiceDatabase> ServiceDatabases { get; set; }
+        public List<ServiceDatabaseDto> ServiceDatabases { get; set; }
     }
 }

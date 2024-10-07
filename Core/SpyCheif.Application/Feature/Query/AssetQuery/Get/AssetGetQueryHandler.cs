@@ -1,6 +1,8 @@
 ﻿
+using AutoMapper;
 using MediatR;
 using SpyCheif.Application.Constants;
+using SpyCheif.Application.Dto.AssetDtos;
 using SpyCheif.Application.Repository.AssetRepo;
 using SpyCheif.Domain.Entity;
 using System;
@@ -14,17 +16,21 @@ namespace SpyCheif.Application.Feature.Query.AssetQuery.Get
     public class AssetGetQueryHandler : IRequestHandler<AssetGetQueryRequest, AssetGetQueryResponse>
     {
         private readonly IReadAssetRepository _readAssetRepository;
-        public AssetGetQueryHandler(IReadAssetRepository readAssetRepository)
+        private readonly IMapper _mapper;
+        public AssetGetQueryHandler(IReadAssetRepository readAssetRepository, IMapper mapper)
         {
             _readAssetRepository = readAssetRepository;
+            _mapper = mapper;
         }
 
         public async Task<AssetGetQueryResponse> Handle(AssetGetQueryRequest request, CancellationToken cancellationToken)
         {
             Asset? asset = _readAssetRepository.Get(request.Id);
             if (asset != null)
-                return new AssetGetQueryResponse() { Asset = asset, Status = true ,Message = ResultMessages.GetSuccessAssetMessage };
-
+            {
+                AssetDto? assetDto = _mapper.Map<AssetDto>(asset);
+                return new AssetGetQueryResponse() { Asset = assetDto, Status = true ,Message = ResultMessages.GetSuccessAssetMessage };
+            }
             return new AssetGetQueryResponse() { Asset = null, Status = false, Message = ResultMessages.GetErrorAssetMessage };
 
         }

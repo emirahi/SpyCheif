@@ -11,5 +11,6 @@ namespace SpyCheif.Domain.Entity
         public Guid AssetTypeId { get; set; }
         public string Value { get; set; }
         public AssetType Type { get; set; }
+        public bool IsActive { get; set; } = true;
     }
 }
