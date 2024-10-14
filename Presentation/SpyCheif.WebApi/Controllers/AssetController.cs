@@ -40,8 +40,8 @@ namespace SpyCheif.WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("[action]")]
-        public async Task<IActionResult> Search([FromQuery]AssetGetOfSearchQueryRequest request)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Search([FromBody]AssetGetOfSearchQueryRequest request)
         {
             var result = await _mediator.Send(request);
             if (result.Status)

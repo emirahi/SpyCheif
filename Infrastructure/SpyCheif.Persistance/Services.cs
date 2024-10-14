@@ -8,10 +8,12 @@ using SpyCheif.Application.Feature.Pipeline;
 using SpyCheif.Application.Mapping;
 using SpyCheif.Application.Repository.AssetRepo;
 using SpyCheif.Application.Repository.AssetTypeRepo;
+using SpyCheif.Application.Repository.ProjectRepo;
 using SpyCheif.Application.Repository.ServiceDatabaseRepo;
 using SpyCheif.Application.Validation.AssetValidation;
 using SpyCheif.Persistance.EntityFramework.AssetRepo;
 using SpyCheif.Persistance.EntityFramework.AssetTypeRepo;
+using SpyCheif.Persistance.EntityFramework.ProjectRepo;
 using SpyCheif.Persistance.EntityFramework.ServiceDatabaseRepo;
 using SpyCheif.Persistance.MongoDb.Base;
 using SpyCheiif.Persistance.Context;
@@ -39,12 +41,14 @@ public static class Services
         service.AddScoped<IReadAssetRepository,EfCoreAssetReadRepository>();
         service.AddScoped<IReadAssetTypeRepository,EfCoreAssetTypeReadRepository>();
         service.AddScoped<IReadServiceDatabaseRepository,EfCoreServiceDatabaseReadRepository>();
+        service.AddScoped<IReadProjectRepository,EfCoreProjectReadRepository>();
         service.AddScoped<IBaseNoSqlReadRepository,MongoBaseReadRepository>();
 
         // Write Repository
         service.AddScoped<IWriteAssetRepository, EfCoreAssetWriteRepository>();
         service.AddScoped<IWriteAssetTypeRepository, EfCoreAssetTypeWriteRepository>();
         service.AddScoped<IWriteServiceDatabaseRepository, EfCoreServiceDatabaseWriteRepository>();
+        service.AddScoped<IWriteProjectRepository, EfCoreProjectWriteRepository>();
 
         //service.AddTransient(typeof(IPipelineBehavior<,>), typeof(PreValidationPipeline<,>));
 

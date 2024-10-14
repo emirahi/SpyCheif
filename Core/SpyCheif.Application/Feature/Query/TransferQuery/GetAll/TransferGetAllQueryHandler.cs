@@ -4,11 +4,6 @@ using SpyCheif.Application.BaseNosql;
 using SpyCheif.Application.Constants;
 using SpyCheif.Application.Repository.ServiceDatabaseRepo;
 using SpyCheif.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpyCheif.Application.Feature.Query.TransferQuery.GetAll
 {
@@ -28,7 +23,7 @@ namespace SpyCheif.Application.Feature.Query.TransferQuery.GetAll
         {
             ServiceDatabase? service = _readServiceDatabaseRepository.Get(service => service.AppName == request.AppName);
             if (service == null)
-                return new TransferGetAllQueryResponse() { Datas = null, Status = false, Message = "" };
+                return new TransferGetAllQueryResponse() { Datas = null, Status = false, Message = ResultMessages.ServiceDatabaseNotFound };
 
             _baseNoSqlReadRepository.SetDatabase(service.DatabaseName);
             _baseNoSqlReadRepository.SetCollection(service.CollentionName);

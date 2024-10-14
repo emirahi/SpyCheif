@@ -23,39 +23,39 @@ namespace SpyCheif.Persistance.EntityFramework.Base
         }
 
 
-        public T? Get(Expression<Func<T, bool>> filter, bool? isActive = null)
+        public virtual T? Get(Expression<Func<T, bool>> filter, bool? isActive = null)
         {
             return isActive != null 
                 ? _table.Where(filter).Where(entity => entity.IsActive == isActive).FirstOrDefault()
                 : _table.Where(filter).FirstOrDefault();
         }
 
-        public T? Get(Guid id, bool? isActive = null)
+        public virtual T? Get(Guid id, bool? isActive = null)
         {
             return isActive != null
                 ? _table.Where(entity => entity.Id == id && entity.IsActive == isActive).FirstOrDefault()
                 : _table.Where(entity => entity.Id == id).FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll(Guid id, bool? isActive = null)
+        public virtual IEnumerable<T> GetAll(Guid id, bool? isActive = null)
         {
             return isActive == null 
-                ? _table.Where(entity => entity.Id == id).ToList() 
-                : _table.Where(entity => entity.Id == id && entity.IsActive == isActive).ToList();
+                ? _table.Where(entity => entity.Id == id)
+                : _table.Where(entity => entity.Id == id && entity.IsActive == isActive);
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter, bool? isActive = null)
+        public virtual IEnumerable<T> GetAll(Expression<Func<T, bool>> filter, bool? isActive = null)
         {
             return isActive == null
-                ? _table.Where(filter).ToList()
-                : _table.Where(filter).Where(entity => entity.IsActive == isActive).ToList();
+                ? _table.Where(filter)
+                : _table.Where(filter).Where(entity => entity.IsActive == isActive);
         }
 
-        public IEnumerable<T> GetAll(bool? isActive = null)
+        public virtual IEnumerable<T> GetAll(bool? isActive = null)
         {
             return isActive == null
-                ? _table.ToList()
-                : _table.Where(entity => entity.IsActive == isActive).ToList();
+                ? _table
+                : _table.Where(entity => entity.IsActive == isActive);
         }
 
     }

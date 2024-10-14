@@ -5,11 +5,6 @@ using SpyCheif.Application.Constants;
 using SpyCheif.Application.Dto.AssetDtos;
 using SpyCheif.Application.Repository.AssetRepo;
 using SpyCheif.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpyCheif.Application.Feature.Query.AssetQuery.Get
 {
@@ -25,7 +20,7 @@ namespace SpyCheif.Application.Feature.Query.AssetQuery.Get
 
         public async Task<AssetGetQueryResponse> Handle(AssetGetQueryRequest request, CancellationToken cancellationToken)
         {
-            Asset? asset = _readAssetRepository.Get(request.Id);
+            Asset? asset = _readAssetRepository.Get(asset => asset.Id == request.Id && asset.ProjectId == request.ProjectId);
             if (asset != null)
             {
                 AssetDto? assetDto = _mapper.Map<AssetDto>(asset);

@@ -15,6 +15,11 @@ namespace SpyCheiif.Persistance.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Asset>().Navigation(asset => asset.Type).AutoInclude();
+            builder.Entity<Asset>().Navigation(asset => asset.Project).AutoInclude();
+
+            builder.Entity<Asset>().HasIndex(asset => asset.Id);
+            builder.Entity<AssetType>().HasIndex(assetType => assetType.Id);
+
             base.OnModelCreating(builder);
         }
 

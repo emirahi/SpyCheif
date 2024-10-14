@@ -233,6 +233,9 @@ namespace SpyCheif.Persistance.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("char(36)");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime(6)");
 
@@ -243,6 +246,10 @@ namespace SpyCheif.Persistance.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AssetTypeId");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Assets");
                 });
@@ -268,7 +275,36 @@ namespace SpyCheif.Persistance.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Id");
+
                     b.ToTable("AssetType");
+                });
+
+            modelBuilder.Entity("SpyCheif.Domain.Entity.Project", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ProjectName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Project");
                 });
 
             modelBuilder.Entity("SpyCheif.Domain.Entity.ServiceDatabase", b =>
@@ -361,6 +397,14 @@ namespace SpyCheif.Persistance.Migrations
                         .HasForeignKey("AssetTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("SpyCheif.Domain.Entity.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
 
                     b.Navigation("Type");
                 });

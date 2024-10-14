@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SpyCheif.Application.Feature.Base
 {
-    public abstract class BaseResponse
+    public class BaseResponse
     {
         public bool Status { get; set; }
         public string Message { get; set; }

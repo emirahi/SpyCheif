@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using SpyCheif.Application.Dto.AssetTypeDtos;
+using SpyCheif.Application.Feature.Command.AssetTypeCommand.Add;
+using SpyCheif.Application.Feature.Command.AssetTypeCommand.Update;
 using SpyCheif.Domain.Entity;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,8 @@ namespace SpyCheif.Application.Mapping
     {
         public AssetTypeMapping()
         {
-            CreateMap<AssetType,AssetTypeDto>();
+            CreateMap<AssetType,AssetTypeDto>().ReverseMap();
+            CreateMap<AssetType,AssetTypeAddCommandRequest>().ReverseMap();
         }
     }
 }

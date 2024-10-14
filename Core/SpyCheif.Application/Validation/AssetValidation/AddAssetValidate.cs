@@ -13,6 +13,7 @@ namespace SpyCheif.Application.Validation.AssetValidation
     {
         public AddAssetValidate()
         {
+            RuleFor(asset => asset.ProjectId).NotNull();
             RuleFor(asset => asset.AssetTypeId).NotNull();
             RuleFor(asset => asset.Value).MinimumLength(3).NotNull();
         }

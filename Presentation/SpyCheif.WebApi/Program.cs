@@ -1,3 +1,4 @@
+using SpyCheif.Infrastructure.Middleware.Validation;
 using SpyCheif.Persistence;
 using System.Reflection;
 
@@ -28,7 +29,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-
+app.UseMiddleware(typeof(ValidationMiddleware));
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

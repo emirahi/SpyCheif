@@ -18,9 +18,7 @@ namespace SpyCheif.Application.Feature.Query.AssetQuery.GetAll
         }
         public async Task<AssetGetAllQueryResponse> Handle(AssetGetAllQueryRequest request, CancellationToken cancellationToken)
         {
-            List<Asset> assets = request.uniq
-                ? _readAssetRepository.GetAll().DistinctBy(asset => asset.Value.ToLower().Trim()).ToList()
-                : _readAssetRepository.GetAll().ToList();
+            List<Asset> assets = _readAssetRepository.GetAll(request.ProjectId,request.Uniq,null).ToList();
 
             if (assets.Count > 0)
             {

@@ -1,15 +1,10 @@
-﻿using SpyCheif.Application.Feature.Base;
-using SpyCheif.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SpyCheif.Application.Dto.AssetTypeDtos;
+using SpyCheif.Application.Feature.Base;
 
 namespace SpyCheif.Application.Feature.Command.AssetTypeCommand.Add
 {
     public class AssetTypeAddCommandResponse:BaseResponse
     {
-        public AssetType AssetType { get; set; }
+        public AssetTypeDto AssetType { get; set; }
     }
 }

@@ -4,12 +4,8 @@ using SpyCheif.Application.Constants;
 using SpyCheif.Application.Dto.AssetDtos;
 using SpyCheif.Application.Repository.AssetRepo;
 using SpyCheif.Application.Repository.AssetTypeRepo;
+using SpyCheif.Application.Repository.ProjectRepo;
 using SpyCheif.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpyCheif.Application.Feature.Command.AssetCommand.Add
 {
@@ -17,14 +13,17 @@ namespace SpyCheif.Application.Feature.Command.AssetCommand.Add
     {
         private IWriteAssetRepository _writeAssetRepository;
         private IReadAssetTypeRepository _readAssetTypeRepository;
+        private IReadProjectRepository _readProjectRepository;
         private IMapper _mapper;
         public AssetAddCommentHandler(
             IWriteAssetRepository writeAssetRepository,
             IReadAssetTypeRepository readAssetTypeRepository,
+            IReadProjectRepository readProjectRepository,
             IMapper mapper)
         {
             _writeAssetRepository = writeAssetRepository;
             _readAssetTypeRepository = readAssetTypeRepository;
+            _readProjectRepository = readProjectRepository;
             _mapper = mapper;
         }
 
@@ -34,7 +33,12 @@ namespace SpyCheif.Application.Feature.Command.AssetCommand.Add
             if (assetType == null)
                 return new AssetAddCommandResponse { Asset = null, Status = false, Message = ResultMessages.AssetTypeNotFound };
 
-            Asset asset = await _writeAssetRepository.AddAsync(new() { AssetTypeId = request.AssetTypeId, Value = request.Value });
+            Project? project = _readProjectRepository.Get(request.ProjectId);
+            if (project == null)
+                return new AssetAddCommandResponse() { Asset = null, Status = false, Message = ResultMessages.ProjectNotFound };
+
+            Asset castAsset = _mapper.Map<Asset>(request);
+            Asset asset = await _writeAssetRepository.AddAsync(castAsset);
             int isSaved = _writeAssetRepository.saveChanges();
 
             if (asset != null && isSaved > 0)

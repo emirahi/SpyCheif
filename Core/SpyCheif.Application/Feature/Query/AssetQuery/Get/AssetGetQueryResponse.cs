@@ -1,6 +1,4 @@
-﻿
-
-using SpyCheif.Application.Dto.AssetDtos;
+﻿using SpyCheif.Application.Dto.AssetDtos;
 using SpyCheif.Application.Feature.Base;
 
 namespace SpyCheif.Application.Feature.Query.AssetQuery.Get
