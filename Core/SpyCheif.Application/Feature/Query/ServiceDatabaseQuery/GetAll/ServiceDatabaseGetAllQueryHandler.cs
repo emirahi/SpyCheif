@@ -11,7 +11,7 @@ namespace SpyCheif.Application.Feature.Query.ServiceDatabaseQuery.GetAll
     {
         private readonly IReadServiceDatabaseRepository _readServiceDatabaseRepository;
         private readonly IMapper _mapper;
-        public ServiceDatabaseGetAllQueryHandler(IReadServiceDatabaseRepository readServiceDatabaseRepository,IMapper mapper)
+        public ServiceDatabaseGetAllQueryHandler(IReadServiceDatabaseRepository readServiceDatabaseRepository, IMapper mapper)
         {
             _readServiceDatabaseRepository = readServiceDatabaseRepository;
             _mapper = mapper;

@@ -1,16 +1,10 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using SpyCheif.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace SpyCheif.Application.BaseNosql
 {
-    public interface IBaseNoSqlWriteRepository<T> where T : BaseEntity,new()
+    public interface IBaseNoSqlWriteRepository<T> where T : BaseEntity, new()
     {
         public MongoClient _client { get; set; }
         public IMongoDatabase _database { get; set; }

@@ -13,7 +13,7 @@ namespace SpyCheif.Application.Feature.Command.ServiceDatabaseCommand.Update
             IWriteServiceDatabaseRepository writeServiceDatabaseRepository,
             IReadServiceDatabaseRepository readServiceDatabaseRepository)
         {
-            _writeServiceDatabaseRepository = writeServiceDatabaseRepository; 
+            _writeServiceDatabaseRepository = writeServiceDatabaseRepository;
             _readServiceDatabaseRepository = readServiceDatabaseRepository;
         }
 
@@ -31,7 +31,7 @@ namespace SpyCheif.Application.Feature.Command.ServiceDatabaseCommand.Update
             int savedCount = _writeServiceDatabaseRepository.saveChanges();
 
             if (savedCount > 0)
-                return new ServiceDatabaseUpdateCommandResponse() {serviceDatabase = serviceDatabase, Status = true, Message = ResultMessages.UpdateSuccessServiceDatabaseMessage };
+                return new ServiceDatabaseUpdateCommandResponse() { serviceDatabase = serviceDatabase, Status = true, Message = ResultMessages.UpdateSuccessServiceDatabaseMessage };
             return new ServiceDatabaseUpdateCommandResponse() { Status = false, Message = ResultMessages.UpdateErrorServiceDatabaseMessage };
 
 

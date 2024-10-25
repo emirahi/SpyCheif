@@ -1,13 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SpyCheif.Application.Feature.Command.AssetCommand.Add;
-using SpyCheif.Application.Feature.Command.AssetCommand.Update;
 using SpyCheif.Application.Feature.Command.AssetTypeCommand.Add;
 using SpyCheif.Application.Feature.Command.AssetTypeCommand.Delete;
 using SpyCheif.Application.Feature.Command.AssetTypeCommand.Update;
-using SpyCheif.Application.Feature.Query.AssetQuery.Get;
-using SpyCheif.Application.Feature.Query.AssetQuery.GetAll;
 using SpyCheif.Application.Feature.Query.AssetTypeQuery.Get;
 using SpyCheif.Application.Feature.Query.AssetTypeQuery.GetAll;
 
@@ -24,7 +19,7 @@ namespace SpyCheif.WebApi.Controllers
         }
 
         [HttpGet()]
-        public async Task<IActionResult> Get([FromQuery]AssetTypeGetAllQueryRequest request)
+        public async Task<IActionResult> Get([FromQuery] AssetTypeGetAllQueryRequest request)
         {
             var result = await _mediator.Send(request);
             if (result.Status)
@@ -33,7 +28,7 @@ namespace SpyCheif.WebApi.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> Get([FromQuery]AssetTypeGetQueryRequest request)
+        public async Task<IActionResult> Get([FromQuery] AssetTypeGetQueryRequest request)
         {
             var result = await _mediator.Send(request);
             if (result.Status)
@@ -60,7 +55,7 @@ namespace SpyCheif.WebApi.Controllers
         }
 
         [HttpDelete("[action]")]
-        public async Task<IActionResult> Delete([FromBody]AssetTypeDeleteCommandRequest assetUpdateCommand)
+        public async Task<IActionResult> Delete([FromBody] AssetTypeDeleteCommandRequest assetUpdateCommand)
         {
             var result = await _mediator.Send(assetUpdateCommand);
             if (result.Status)

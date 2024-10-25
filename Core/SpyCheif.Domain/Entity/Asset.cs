@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpyCheif.Domain.Entity
+﻿namespace SpyCheif.Domain.Entity
 {
     public class Asset : BaseEntity
     {
@@ -12,6 +6,6 @@ namespace SpyCheif.Domain.Entity
         public Guid ProjectId { get; set; }
         public string Value { get; set; }
         public AssetType Type { get; set; }
-        public Project Project{ get; set; }
+        public Project Project { get; set; }
     }
 }

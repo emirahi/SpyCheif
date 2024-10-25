@@ -2,7 +2,7 @@
 
 namespace SpyCheif.Application.Feature.Query.ProjectQuery.GetAll
 {
-    public class ProjectGetAllQueryRequest:IRequest<ProjectGetAllQueryResponse>
+    public class ProjectGetAllQueryRequest : IRequest<ProjectGetAllQueryResponse>
     {
     }
 }

@@ -28,7 +28,7 @@ namespace SpyCheif.Application.Feature.Command.AssetCommand.Delete
             if (savedCount > 0)
                 return new AssetDeleteCommandResponse() { Status = true, Message = ResultMessages.DeleteSuccessAssetMessage };
             return new AssetDeleteCommandResponse() { Status = false, Message = ResultMessages.DeleteErrorAssetMessage };
-            
+
         }
     }
 }

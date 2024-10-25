@@ -1,11 +1,5 @@
-﻿
-
-using AutoMapper;
-using FluentValidation;
-using FluentValidation.Results;
+﻿using FluentValidation;
 using MediatR;
-using SpyCheif.Application.Dto;
-using SpyCheif.Application.Validation;
 
 namespace SpyCheif.Application.Feature.Pipeline
 {

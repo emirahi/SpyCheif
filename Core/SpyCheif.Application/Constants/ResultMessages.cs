@@ -9,6 +9,8 @@ namespace SpyCheif.Application.Constants
         public static string AddSuccessAssetMessage = "Asset is add operation succeeded";
         public static string AddErrorAssetMessage = "Asset is add operation failed";
 
+        public static string AddOfMultiSuccessAssetMessage = "Asset add operation created on the background.";
+
         public static string UpdateSuccessAssetMessage = "Asset is update operation succeeded";
         public static string UpdateErrorAssetMessage = "Asset is update operation failed";
         public static string UpdateSaveFailedAssetMessage = "Asset is not saved";
@@ -28,7 +30,7 @@ namespace SpyCheif.Application.Constants
         #endregion
 
         #region AssetType
-        
+
         public static string AssetTypeNotFound = "Asset type is not found";
         public static string AddSuccessAssetTypeMessage = "Asset Type is add operation succeeded";
         public static string AddErrorAssetTypeMessage = "Asset Type is add operation failed";

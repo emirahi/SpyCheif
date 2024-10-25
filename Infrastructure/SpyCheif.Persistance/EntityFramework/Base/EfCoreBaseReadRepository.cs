@@ -2,12 +2,7 @@
 using SpyCheif.Application.BaseRdms;
 using SpyCheif.Domain.Entity;
 using SpyCheiif.Persistance.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpyCheif.Persistance.EntityFramework.Base
 {
@@ -25,7 +20,7 @@ namespace SpyCheif.Persistance.EntityFramework.Base
 
         public virtual T? Get(Expression<Func<T, bool>> filter, bool? isActive = null)
         {
-            return isActive != null 
+            return isActive != null
                 ? _table.Where(filter).Where(entity => entity.IsActive == isActive).FirstOrDefault()
                 : _table.Where(filter).FirstOrDefault();
         }
@@ -39,7 +34,7 @@ namespace SpyCheif.Persistance.EntityFramework.Base
 
         public virtual IEnumerable<T> GetAll(Guid id, bool? isActive = null)
         {
-            return isActive == null 
+            return isActive == null
                 ? _table.Where(entity => entity.Id == id)
                 : _table.Where(entity => entity.Id == id && entity.IsActive == isActive);
         }

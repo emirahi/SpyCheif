@@ -39,7 +39,7 @@ namespace SpyCheif.Persistance.MongoDb.Base
         }
 
         public BsonDocument? Get(string id)
-        {   
+        {
             ObjectId objectId = ObjectId.Parse(id);
             var filter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
             var result = _collection.Find(filter).FirstOrDefault();

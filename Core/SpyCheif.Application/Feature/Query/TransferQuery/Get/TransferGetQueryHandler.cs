@@ -27,10 +27,10 @@ namespace SpyCheif.Application.Feature.Query.TransferQuery.Get
 
             _baseNoSqlReadRepository.SetDatabase(service.DatabaseName);
             _baseNoSqlReadRepository.SetCollection(service.CollentionName);
-            BsonDocument? bson =  _baseNoSqlReadRepository.Get(request.Id);
+            BsonDocument? bson = _baseNoSqlReadRepository.Get(request.Id);
             if (bson != null)
             {
-                string data = bson.ToJson().Replace("ObjectId(","").Replace("\"),", "\",");
+                string data = bson.ToJson().Replace("ObjectId(", "").Replace("\"),", "\",");
                 return new TransferGetQueryResponse() { Data = data, Status = true, Message = ResultMessages.GetSuccessTransferMessage };
             }
             return new TransferGetQueryResponse() { Data = null, Status = true, Message = ResultMessages.GetErrorTransferMessage };

@@ -19,7 +19,7 @@ namespace SpyCheif.WebApi.Controllers
         }
 
         [HttpGet()]
-        public async Task<IActionResult> Get([FromQuery]ProjectGetAllQueryRequest request)
+        public async Task<IActionResult> Get([FromQuery] ProjectGetAllQueryRequest request)
         {
             var result = await _mediator.Send(request);
             if (result.Status)
@@ -28,7 +28,7 @@ namespace SpyCheif.WebApi.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> Get([FromQuery]ProjectGetQueryRequest request)
+        public async Task<IActionResult> Get([FromQuery] ProjectGetQueryRequest request)
         {
             var result = await _mediator.Send(request);
             if (result.Status)
@@ -37,7 +37,7 @@ namespace SpyCheif.WebApi.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Insert([FromBody]ProjectAddCommandRequest assetAddCommand)
+        public async Task<IActionResult> Insert([FromBody] ProjectAddCommandRequest assetAddCommand)
         {
             var result = await _mediator.Send(assetAddCommand);
             if (result.Status)
@@ -46,7 +46,7 @@ namespace SpyCheif.WebApi.Controllers
         }
 
         [HttpPut("[action]")]
-        public async Task<IActionResult> Update([FromBody]ProjectUpdateCommandRequest assetUpdateCommand)
+        public async Task<IActionResult> Update([FromBody] ProjectUpdateCommandRequest assetUpdateCommand)
         {
             var result = await _mediator.Send(assetUpdateCommand);
             if (result.Status)
@@ -55,7 +55,7 @@ namespace SpyCheif.WebApi.Controllers
         }
 
         [HttpDelete("[action]")]
-        public async Task<IActionResult> Delete([FromBody]ProjectDeleteCommandRequest assetUpdateCommand)
+        public async Task<IActionResult> Delete([FromBody] ProjectDeleteCommandRequest assetUpdateCommand)
         {
             var result = await _mediator.Send(assetUpdateCommand);
             if (result.Status)

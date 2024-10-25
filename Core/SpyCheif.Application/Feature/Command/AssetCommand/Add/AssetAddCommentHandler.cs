@@ -9,13 +9,13 @@ using SpyCheif.Domain.Entity;
 
 namespace SpyCheif.Application.Feature.Command.AssetCommand.Add
 {
-    public class AssetAddCommentHandler : IRequestHandler<AssetAddCommandRequest, AssetAddCommandResponse>
+    public class AssetAddOfMultiCommentHandler : IRequestHandler<AssetAddCommandRequest, AssetAddOfMultiCommandResponse>
     {
         private IWriteAssetRepository _writeAssetRepository;
         private IReadAssetTypeRepository _readAssetTypeRepository;
         private IReadProjectRepository _readProjectRepository;
         private IMapper _mapper;
-        public AssetAddCommentHandler(
+        public AssetAddOfMultiCommentHandler(
             IWriteAssetRepository writeAssetRepository,
             IReadAssetTypeRepository readAssetTypeRepository,
             IReadProjectRepository readProjectRepository,
@@ -27,15 +27,15 @@ namespace SpyCheif.Application.Feature.Command.AssetCommand.Add
             _mapper = mapper;
         }
 
-        public async Task<AssetAddCommandResponse> Handle(AssetAddCommandRequest request, CancellationToken cancellationToken)
+        public async Task<AssetAddOfMultiCommandResponse> Handle(AssetAddCommandRequest request, CancellationToken cancellationToken)
         {
             AssetType? assetType = _readAssetTypeRepository.Get(request.AssetTypeId);
             if (assetType == null)
-                return new AssetAddCommandResponse { Asset = null, Status = false, Message = ResultMessages.AssetTypeNotFound };
+                return new AssetAddOfMultiCommandResponse { Asset = null, Status = false, Message = ResultMessages.AssetTypeNotFound };
 
             Project? project = _readProjectRepository.Get(request.ProjectId);
             if (project == null)
-                return new AssetAddCommandResponse() { Asset = null, Status = false, Message = ResultMessages.ProjectNotFound };
+                return new AssetAddOfMultiCommandResponse() { Asset = null, Status = false, Message = ResultMessages.ProjectNotFound };
 
             Asset castAsset = _mapper.Map<Asset>(request);
             Asset asset = await _writeAssetRepository.AddAsync(castAsset);
@@ -44,7 +44,7 @@ namespace SpyCheif.Application.Feature.Command.AssetCommand.Add
             if (asset != null && isSaved > 0)
             {
                 AssetDto assetDto = _mapper.Map<AssetDto>(asset);
-                return new AssetAddCommandResponse()
+                return new AssetAddOfMultiCommandResponse()
                 {
                     Asset = assetDto,
                     Status = true,
@@ -52,7 +52,7 @@ namespace SpyCheif.Application.Feature.Command.AssetCommand.Add
                 };
             }
 
-            return new AssetAddCommandResponse()
+            return new AssetAddOfMultiCommandResponse()
             {
                 Status = false,
                 Message = ResultMessages.AddErrorAssetMessage,

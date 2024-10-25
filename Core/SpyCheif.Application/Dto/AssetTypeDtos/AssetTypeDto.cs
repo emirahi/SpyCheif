@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpyCheif.Application.Dto.AssetTypeDtos
+﻿namespace SpyCheif.Application.Dto.AssetTypeDtos
 {
-    public class AssetTypeDto : IDto
+    public class AssetTypeDto : IEntityDto
     {
         public Guid Id { get; set; }
         public string Type { get; set; }

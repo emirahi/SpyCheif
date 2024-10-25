@@ -31,7 +31,7 @@ namespace SpyCheif.Infrastructure.Middleware.Validation
                 if (e is ValidationException validationException)
                 {
                     var errors = validationException.Errors.Select(failure => failure.ErrorMessage).ToList();
-                    response.Message = string.Join(", ", errors.Select(error => error.Replace("'","")));
+                    response.Message = string.Join(", ", errors.Select(error => error.Replace("'", "")));
                 }
                 httpContext.Response.WriteAsync(JsonSerializer.Serialize(response));
 

@@ -3,18 +3,13 @@ using MongoDB.Driver;
 using SpyCheif.Application.BaseNosql;
 using SpyCheif.Application.Exception;
 using SpyCheif.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace SpyCheif.Persistance.MongoDb.Base
 {
     public class MongoBaseWriteRepository<T> : IBaseNoSqlWriteRepository<T> where T : BaseEntity, new()
     {
-        public MongoClient _client{ get; set; }
+        public MongoClient _client { get; set; }
         public IMongoDatabase _database { get; set; }
         public IMongoCollection<BsonDocument> _collection { get; set; }
 

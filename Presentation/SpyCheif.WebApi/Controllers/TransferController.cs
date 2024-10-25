@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SpyCheif.Application.Feature.Command.TransferCommand.FileUpload;
 using SpyCheif.Application.Feature.Query.TransferQuery.Get;
 using SpyCheif.Application.Feature.Query.TransferQuery.GetAll;
 
@@ -16,7 +17,7 @@ namespace SpyCheif.WebApi.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> Get([FromQuery]TransferGetQueryRequest request)
+        public async Task<IActionResult> Get([FromQuery] TransferGetQueryRequest request)
         {
             var result = await _mediator.Send(request);
             if (result.Status)
@@ -25,7 +26,7 @@ namespace SpyCheif.WebApi.Controllers
         }
 
         [HttpGet()]
-        public async Task<IActionResult> GetAll([FromQuery]TransferGetAllQueryRequest request)
+        public async Task<IActionResult> GetAll([FromQuery] TransferGetAllQueryRequest request)
         {
             var result = await _mediator.Send(request);
             if (result.Status)
@@ -33,6 +34,14 @@ namespace SpyCheif.WebApi.Controllers
             return BadRequest(result);
         }
 
+        [HttpPost()]
+        public async Task<IActionResult> FileUpload(TransferFileUploadRequest request)
+        {
+            var result = await _mediator.Send(request);
+            if (result.Status)
+                return Ok(result);
+            return BadRequest(result);
+        }
 
     }
 }

@@ -46,7 +46,7 @@ namespace SpyCheif.Application.Feature.Command.AssetCommand.Update
 
                 return new AssetUpdateCommandResponse() { asset = null, Status = false, Message = ResultMessages.UpdateSaveFailedAssetMessage };
             }
-            return new AssetUpdateCommandResponse() { asset = null, Status = false, Message = ResultMessages.UpdateErrorAssetMessage};
+            return new AssetUpdateCommandResponse() { asset = null, Status = false, Message = ResultMessages.UpdateErrorAssetMessage };
         }
 
 

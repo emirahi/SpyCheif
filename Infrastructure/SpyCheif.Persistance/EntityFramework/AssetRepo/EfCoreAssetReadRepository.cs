@@ -3,11 +3,6 @@ using SpyCheif.Application.Repository.AssetRepo;
 using SpyCheif.Domain.Entity;
 using SpyCheif.Persistance.EntityFramework.Base;
 using SpyCheiif.Persistance.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpyCheif.Persistance.EntityFramework.AssetRepo
 {
@@ -19,7 +14,7 @@ namespace SpyCheif.Persistance.EntityFramework.AssetRepo
             _spyChiefDbContext = spyChiefDbContext;
         }
 
-        public IEnumerable<Asset> GetAll(Guid projectId,bool uniq = false,bool? isActive = null)
+        public IEnumerable<Asset> GetAll(Guid projectId, bool uniq = false, bool? isActive = null)
         {
             IQueryable<Asset> assets = isActive != null
                 ? _spyChiefDbContext.Assets.Where(asset => asset.IsActive == isActive && asset.ProjectId == projectId)

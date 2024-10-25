@@ -1,6 +1,6 @@
 ﻿namespace SpyCheif.Application.Dto.AssetDtos
 {
-    public class AssetDto : IDto
+    public class AssetDto : IEntityDto
     {
         public Guid Id { get; set; }
         public Guid AssetTypeId { get; set; }

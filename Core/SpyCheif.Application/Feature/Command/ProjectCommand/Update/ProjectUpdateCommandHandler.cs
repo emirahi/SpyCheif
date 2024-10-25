@@ -38,7 +38,7 @@ namespace SpyCheif.Application.Feature.Command.ProjectCommand.Update
                 }
                 return new() { Project = null, Status = false, Message = ResultMessages.UpdateSaveFailedProjectMessage };
             }
-            return new() { Project = null, Status = false, Message = ResultMessages.UpdateErrorProjectMessage};
+            return new() { Project = null, Status = false, Message = ResultMessages.UpdateErrorProjectMessage };
         }
     }
 }

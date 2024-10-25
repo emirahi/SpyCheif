@@ -24,7 +24,7 @@ namespace SpyCheif.Application.Feature.Query.AssetQuery.Get
             if (asset != null)
             {
                 AssetDto? assetDto = _mapper.Map<AssetDto>(asset);
-                return new AssetGetQueryResponse() { Asset = assetDto, Status = true ,Message = ResultMessages.GetSuccessAssetMessage };
+                return new AssetGetQueryResponse() { Asset = assetDto, Status = true, Message = ResultMessages.GetSuccessAssetMessage };
             }
             return new AssetGetQueryResponse() { Asset = null, Status = false, Message = ResultMessages.GetErrorAssetMessage };
 

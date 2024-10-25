@@ -1,4 +1,6 @@
-using SpyCheif.Infrastructure.Middleware.Validation;
+using Hangfire;
+using Hangfire.MySql;
+using MongoDB.Driver.Core.Configuration;
 using SpyCheif.Persistence;
 using System.Reflection;
 
@@ -19,6 +21,11 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.CreateSecretServices();
 builder.Services.AddCors(option => option.AddDefaultPolicy(policy => policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod()));
 
+string connection = "Server=localhost;Database=Hangfire;Uid=root;Pwd=123456789;Allow User Variables=True";
+builder.Services.AddHangfire(config => config.UseStorage(new MySqlStorage(connection, new MySqlStorageOptions())));
+
+builder.Services.AddHangfireServer();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,9 +35,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHangfireDashboard();
 
-app.UseMiddleware(typeof(ValidationMiddleware));
+//app.UseMiddleware(typeof(ValidationMiddleware));
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.UseAuthorization();
 

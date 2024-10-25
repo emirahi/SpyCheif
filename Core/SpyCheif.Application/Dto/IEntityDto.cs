@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SpyCheif.Application.Dto
+﻿namespace SpyCheif.Application.Dto
 {
-    public interface IDto
+    public interface IEntityDto
     {
         public Guid Id { get; set; }
         public DateTime CreatedDate { get; set; }

@@ -12,21 +12,21 @@ namespace SpyCheif.Application.Feature.Query.AssetQuery.GetOfSearch
     {
         private readonly IReadAssetRepository _readAssetRepository;
         private readonly IMapper _mapper;
-        
-        public AssetGetOfSearchQueryHandler(IReadAssetRepository readAssetRepository,IMapper mapper)
+
+        public AssetGetOfSearchQueryHandler(IReadAssetRepository readAssetRepository, IMapper mapper)
         {
             _readAssetRepository = readAssetRepository;
             _mapper = mapper;
         }
-        
+
         public async Task<AssetGetOfSearchQueryResponse> Handle(AssetGetOfSearchQueryRequest request, CancellationToken cancellationToken)
         {
-            
+
             IEnumerable<Asset> assets = _readAssetRepository.GetAll(asset => asset.ProjectId == request.ProjectId);
             if (assets.Count() <= 0)
                 return new AssetGetOfSearchQueryResponse() { Assets = null, Status = false, Message = ResultMessages.ProjectNotFound };
-            
-            if (request.match != null)
+
+            if (request.match != null && request.match.Length > 0)
             {
                 assets = request.AssetTypeId.Equals(Guid.Empty)
                     ? assets.Where(asset => asset.AssetTypeId == request.AssetTypeId && Regex.IsMatch(asset.Value, request.match))
@@ -40,7 +40,7 @@ namespace SpyCheif.Application.Feature.Query.AssetQuery.GetOfSearch
             assets = request.uniq ? assets.DistinctBy(asset => asset.Value).ToList() : assets.ToList();
             List<AssetDto> assetDtos = _mapper.Map<List<AssetDto>>(assets);
 
-            if (assetDtos.Count > 0) 
+            if (assetDtos.Count > 0)
                 return new AssetGetOfSearchQueryResponse() { Assets = assetDtos, Status = true, Message = ResultMessages.GetOfSearchSuccessAssetMessage };
             return new AssetGetOfSearchQueryResponse() { Assets = null, Status = false, Message = ResultMessages.GetOfSearchErrorAssetMessage };
         }

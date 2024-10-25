@@ -20,7 +20,8 @@ namespace SpyCheif.Application.Feature.Command.ProjectCommand.Delete
         public async Task<ProjectDeleteCommandResponse> Handle(ProjectDeleteCommandRequest request, CancellationToken cancellationToken)
         {
             Project? project = _writeProjectRepository.Delete(request.Id);
-            if (project != null)
+            int saveChanges = _writeProjectRepository.saveChanges();
+            if (saveChanges > 0)
             {
                 return new ProjectDeleteCommandResponse() { Status = true, Message = ResultMessages.DeleteSuccessProjectMessage };
             }

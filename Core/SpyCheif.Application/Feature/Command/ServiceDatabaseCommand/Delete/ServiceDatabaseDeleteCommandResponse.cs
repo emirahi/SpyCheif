@@ -2,7 +2,7 @@
 
 namespace SpyCheif.Application.Feature.Command.ServiceDatabaseCommand.Delete
 {
-    public class ServiceDatabaseDeleteCommandResponse:BaseResponse
+    public class ServiceDatabaseDeleteCommandResponse : BaseResponse
     {
     }
 }

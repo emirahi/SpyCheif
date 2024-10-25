@@ -4,18 +4,20 @@ namespace SpyCheif.Persistence;
 
 public static class Configuration
 {
-    public static string? MysqlConnectionString {
+    public static string? MysqlConnectionString
+    {
         get
         {
             ConfigurationManager configurationManager = new();
             configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../../Presentation/SpyCheif.WebApi"));
             configurationManager.AddJsonFile("appsettings.json");
-            
+
             string? result = configurationManager["ConnectionString:Mysql"];
             return result;
         }
     }
-    public static string? MysqlConnectionVersion {
+    public static string? MysqlConnectionVersion
+    {
         get
         {
             ConfigurationManager configurationManager = new();

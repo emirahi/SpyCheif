@@ -2,7 +2,7 @@
 
 namespace SpyCheif.Application.Feature.Command.AssetTypeCommand.Delete
 {
-    public class AssetTypeDeleteCommandResponse:BaseResponse
+    public class AssetTypeDeleteCommandResponse : BaseResponse
     {
     }
 }

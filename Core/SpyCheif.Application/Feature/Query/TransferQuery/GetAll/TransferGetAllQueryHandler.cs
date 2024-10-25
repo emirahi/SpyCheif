@@ -30,7 +30,7 @@ namespace SpyCheif.Application.Feature.Query.TransferQuery.GetAll
             List<BsonDocument> bsons = _baseNoSqlReadRepository.GetAll();
             if (bsons.Count > 0)
             {
-                string datas = bsons.ToJson().Replace("ObjectId(","").Replace("\"),","\",");
+                string datas = bsons.ToJson().Replace("ObjectId(", "").Replace("\"),", "\",");
                 return new TransferGetAllQueryResponse() { Datas = datas, Status = true, Message = ResultMessages.GetAllSuccessTransferMessage };
             }
             return new TransferGetAllQueryResponse() { Datas = null, Status = false, Message = ResultMessages.GetAllErrorTransferMessage };

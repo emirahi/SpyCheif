@@ -27,7 +27,7 @@ namespace SpyCheif.Application.Feature.Query.ProjectQuery.Get
                 ProjectDto projectDto = _mapper.Map<ProjectDto>(project);
                 return new() { Project = projectDto, Status = true, Message = ResultMessages.GetSuccessProjectMessage };
             }
-            return new() { Project = null, Status = false, Message = ResultMessages.GetErrorProjectMessage};
+            return new() { Project = null, Status = false, Message = ResultMessages.GetErrorProjectMessage };
 
         }
     }
