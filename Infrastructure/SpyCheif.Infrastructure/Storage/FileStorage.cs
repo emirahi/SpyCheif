@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SpyCheif.Application.Dto.FileStorage;
+using SpyCheif.Application.Enum;
 using SpyCheif.Application.Utils.Storage;
+using System.Globalization;
 using System.Text;
 
 namespace SpyCheif.Infrastructure.Storage
@@ -15,6 +19,68 @@ namespace SpyCheif.Infrastructure.Storage
             if (convert.Count > 0)
                 return convert[0].Keys;
             return new List<string>();
+        }
+
+        public List<Dictionary<string, string>> ReadToCsv(string path, string delimiter = ",")
+        {
+            var result = new List<Dictionary<string, string>>();
+
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                Delimiter = delimiter,
+                HasHeaderRecord = true
+            };
+
+            using (var reader = new StreamReader(path))
+            using (var csv = new CsvReader(reader, config))
+            {
+                csv.Read();
+                csv.ReadHeader();
+
+                while (csv.Read())
+                {
+                    var record = new Dictionary<string, string>();
+                    foreach (var header in csv.HeaderRecord)
+                    {
+                        record[header] = csv.GetField(header);
+                    }
+                    result.Add(record);
+                }
+            }
+
+            return result;
+        }
+
+        public List<Dictionary<string, string>> ReadCsv(string path, int maxRows, string delimiter = ",")
+        {
+            var result = new List<Dictionary<string, string>>();
+
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                Delimiter = delimiter,
+                HasHeaderRecord = true
+            };
+
+            using (var reader = new StreamReader(path))
+            using (var csv = new CsvReader(reader, config))
+            {
+                csv.Read();
+                csv.ReadHeader();
+
+                int currentRow = 0;
+                while (csv.Read() && currentRow < maxRows)
+                {
+                    var record = new Dictionary<string, string>();
+                    foreach (var header in csv.HeaderRecord)
+                    {
+                        record[header] = csv.GetField(header);
+                    }
+                    result.Add(record);
+                    currentRow++;
+                }
+            }
+
+            return result;
         }
 
         public List<Dictionary<string, object>> ReadToJson(string jsons, int readline)
@@ -107,6 +173,22 @@ namespace SpyCheif.Infrastructure.Storage
             return returned;
         }
 
+        public List<string> StreamFullRead(string path, int readline)
+        {
+            List<string> returned = new List<string>();
+            using (StreamReader stream = new StreamReader(path))
+            {
+                for (int line = 0; line < readline; line++)
+                {
+                    string? temp = stream.ReadLine();
+                    if (temp != null)
+                        returned.Add(temp);
+                }
+
+            }
+            return returned;
+        }
+
         public string StreamFullRead(string path)
         {
             if (!Path.Exists(path))
@@ -119,7 +201,21 @@ namespace SpyCheif.Infrastructure.Storage
             }
         }
 
-        public FileUploadResultDto Upload(IFormFile file, string remoteHost)
+        public List<string> StreamFullReadToList(string path)
+        {
+            List<string> returned = new List<string>();
+            using (StreamReader reader = new StreamReader(path))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    returned.Add(line);
+                }
+            }
+            return returned;
+        }
+
+        public FileUploadDto Upload(IFormFile file, string remoteHost)
         {
             var currentDirectory = Path.GetFullPath("wwwroot");
             var uploadPath = Path.Combine(currentDirectory, "uploads");
@@ -128,13 +224,45 @@ namespace SpyCheif.Infrastructure.Storage
 
             string newName = $"{Guid.NewGuid().ToString()}{Path.GetExtension(file.FileName)}";
             uploadPath = Path.Combine(uploadPath, newName);
+            string extension = Path.GetExtension(uploadPath).Replace(".", "");
+
+            FileUploadDto result = new FileUploadDto();
+            result.FileName = file.FileName;
+            result.UniqName = newName;
+            result.LocalPath = uploadPath;
+            result.RemotePath = $"{remoteHost}/uploads/{newName}";
+
             using (FileStream stream = new FileStream(uploadPath, FileMode.Create, FileAccess.Write))
             {
-                file.CopyTo(stream);
+                using (StreamReader reader = new StreamReader(file.OpenReadStream(), Encoding.UTF8))
+                {
+                    var fullRead = reader.ReadToEnd();
+
+                    switch (extension.ToLower())
+                    {
+                        case "json":
+                            result.FileType = FileTypeEnum.JSON;
+                            if (fullRead.StartsWith("{"))
+                                stream.Write(Encoding.UTF8.GetBytes($"[{fullRead.Replace("},", "}").Replace("}", "},")}]"));
+                            else
+                                file.CopyTo(stream);
+                            break;
+                        case "csv":
+                            result.FileType = FileTypeEnum.CSV;
+                            file.CopyTo(stream);
+                            break;
+                        case "txt":
+                            result.FileType = FileTypeEnum.TEXT;
+                            file.CopyTo(stream);
+                            break;
+                        default:
+                            return null;
+                    }
+                }
             }
 
             if (File.Exists(uploadPath))
-                return new() { FileName = file.FileName, UniqName = newName, LocalPath = uploadPath, RemotePath = $"{remoteHost}/uploads/{newName}" };
+                return result;
             return null;
         }
 

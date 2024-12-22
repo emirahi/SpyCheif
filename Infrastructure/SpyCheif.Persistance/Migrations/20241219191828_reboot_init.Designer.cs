@@ -12,15 +12,15 @@ using SpyCheiif.Persistance.Context;
 namespace SpyCheif.Persistance.Migrations
 {
     [DbContext(typeof(SpyChiefDbContext))]
-    [Migration("20240917043647_mig_1")]
-    partial class mig_1
+    [Migration("20241219191828_reboot_init")]
+    partial class reboot_init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
@@ -236,6 +236,9 @@ namespace SpyCheif.Persistance.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("char(36)");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime(6)");
 
@@ -246,6 +249,10 @@ namespace SpyCheif.Persistance.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AssetTypeId");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Assets");
                 });
@@ -271,7 +278,76 @@ namespace SpyCheif.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AssetType");
+                    b.HasIndex("Id");
+
+                    b.ToTable("AssetTypes");
+                });
+
+            modelBuilder.Entity("SpyCheif.Domain.Entity.FileStorage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FileType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("LocalPath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RemotePath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UniqName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FileStorages");
+                });
+
+            modelBuilder.Entity("SpyCheif.Domain.Entity.Project", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ProjectName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("SpyCheif.Domain.Entity.ServiceDatabase", b =>
@@ -279,6 +355,10 @@ namespace SpyCheif.Persistance.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
+
+                    b.Property<string>("AppName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("CollentionName")
                         .IsRequired()
@@ -360,6 +440,14 @@ namespace SpyCheif.Persistance.Migrations
                         .HasForeignKey("AssetTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("SpyCheif.Domain.Entity.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
 
                     b.Navigation("Type");
                 });

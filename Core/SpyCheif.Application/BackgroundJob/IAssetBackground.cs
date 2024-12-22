@@ -1,5 +1,5 @@
 ﻿using Hangfire;
-using SpyCheif.Domain.Entity;
+using SpyCheif.Application.Dto.AssetDtos;
 
 namespace SpyCheif.Application.BackgroundJob
 {
@@ -7,6 +7,6 @@ namespace SpyCheif.Application.BackgroundJob
     public interface IAssetBackground
     {
         [JobDisplayName("Create Asset")]
-        public void Add(List<Asset> assets);
+        public void Add(FileAssetDto fileAssetDto);
     }
 }

@@ -100,6 +100,7 @@ namespace SpyCheif.Application.Constants
 
         #endregion
 
+        public static string NotFoundFileStorage = "File s not found";
 
     }
 }

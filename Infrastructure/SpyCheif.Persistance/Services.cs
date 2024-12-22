@@ -10,6 +10,7 @@ using SpyCheif.Application.Feature.Pipeline;
 using SpyCheif.Application.Mapping;
 using SpyCheif.Application.Repository.AssetRepo;
 using SpyCheif.Application.Repository.AssetTypeRepo;
+using SpyCheif.Application.Repository.FileStorageRepo;
 using SpyCheif.Application.Repository.ProjectRepo;
 using SpyCheif.Application.Repository.ServiceDatabaseRepo;
 using SpyCheif.Application.Utils.Storage;
@@ -18,8 +19,10 @@ using SpyCheif.Infrastructure.Background.Hangfire;
 using SpyCheif.Infrastructure.Storage;
 using SpyCheif.Persistance.EntityFramework.AssetRepo;
 using SpyCheif.Persistance.EntityFramework.AssetTypeRepo;
+using SpyCheif.Persistance.EntityFramework.FileStorageRepo;
 using SpyCheif.Persistance.EntityFramework.ProjectRepo;
 using SpyCheif.Persistance.EntityFramework.ServiceDatabaseRepo;
+using SpyCheif.Persistance.EntityFramework.TransferRepo;
 using SpyCheif.Persistance.MongoDb.Base;
 using SpyCheiif.Persistance.Context;
 
@@ -50,6 +53,7 @@ public static class Services
         service.AddScoped<IReadAssetTypeRepository, EfCoreAssetTypeReadRepository>();
         service.AddScoped<IReadServiceDatabaseRepository, EfCoreServiceDatabaseReadRepository>();
         service.AddScoped<IReadProjectRepository, EfCoreProjectReadRepository>();
+        service.AddScoped<IReadFileStorageRepository, EfCoreFileStorageReadRepository>();
         service.AddScoped<IBaseNoSqlReadRepository, MongoBaseReadRepository>();
 
         // Write Repository
@@ -57,6 +61,7 @@ public static class Services
         service.AddScoped<IWriteAssetTypeRepository, EfCoreAssetTypeWriteRepository>();
         service.AddScoped<IWriteServiceDatabaseRepository, EfCoreServiceDatabaseWriteRepository>();
         service.AddScoped<IWriteProjectRepository, EfCoreProjectWriteRepository>();
+        service.AddScoped<IWriteFileStorageRepository, EfCoreFileStorageWriteRepository>();
 
         //service.AddTransient(typeof(IPipelineBehavior<,>), typeof(PreValidationPipeline<,>));
 

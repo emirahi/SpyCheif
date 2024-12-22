@@ -1,6 +1,5 @@
 using Hangfire;
 using Hangfire.MySql;
-using MongoDB.Driver.Core.Configuration;
 using SpyCheif.Persistence;
 using System.Reflection;
 

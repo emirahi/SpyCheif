@@ -17,7 +17,7 @@ namespace SpyCheif.Persistance.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
@@ -277,7 +277,47 @@ namespace SpyCheif.Persistance.Migrations
 
                     b.HasIndex("Id");
 
-                    b.ToTable("AssetType");
+                    b.ToTable("AssetTypes");
+                });
+
+            modelBuilder.Entity("SpyCheif.Domain.Entity.FileStorage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FileType")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("LocalPath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("RemotePath")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UniqName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FileStorages");
                 });
 
             modelBuilder.Entity("SpyCheif.Domain.Entity.Project", b =>
@@ -304,7 +344,7 @@ namespace SpyCheif.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Project");
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("SpyCheif.Domain.Entity.ServiceDatabase", b =>

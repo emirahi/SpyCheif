@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
 using SpyCheif.Application.Feature.Command.AssetCommand.AddOfMulti;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpyCheif.Application.Validation.AssetValidation
 {
@@ -14,7 +9,7 @@ namespace SpyCheif.Application.Validation.AssetValidation
         {
             RuleFor(asset => asset.AssetTypeId).NotEqual(Guid.Empty);
             RuleFor(asset => asset.ProjectId).NotEqual(Guid.Empty);
-            RuleFor(asset => asset.Value).Must(assets => assets.Count > 0);
+            RuleFor(asset => asset.FileId).NotEqual(Guid.Empty);
         }
 
     }

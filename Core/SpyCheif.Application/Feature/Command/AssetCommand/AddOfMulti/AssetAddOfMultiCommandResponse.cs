@@ -4,5 +4,6 @@ namespace SpyCheif.Application.Feature.Command.AssetCommand.AddOfMulti
 {
     public class AssetAddOfMultiCommandResponse : BaseResponse
     {
+        public string BackgroundId { get; set; }
     }
 }

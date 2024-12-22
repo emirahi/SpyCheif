@@ -40,6 +40,9 @@ namespace SpyCheiif.Persistance.Context
         }
 
         public DbSet<Asset> Assets { get; set; }
+        public DbSet<AssetType> AssetTypes { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<FileStorage> FileStorages { get; set; }
         public DbSet<ServiceDatabase> ServiceDatabases { get; set; }
 
 
